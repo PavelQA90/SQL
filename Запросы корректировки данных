@@ -141,6 +141,14 @@ SELECT * FROM book;
 
 SELECT * FROM supply;
 
+Включить новых авторов в таблицу author с помощью запроса на добавление, а затем вывести все данные из таблицы author. 
+Новыми считаются авторы, которые есть в таблице supply, но нет в таблице author.
+
+INSERT INTO author (author_id, name_author)
+SELECT author.name_author, supply.author
+FROM author RIGHT JOIN supply ON author.name_author=supply.author
+WHERE author.name_author IS NULL;
+SELECT * FROM author;
 
 
 
