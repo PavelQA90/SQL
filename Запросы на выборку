@@ -64,6 +64,10 @@ GROUP BY name
 HAVING COUNT(name) > 3
 ORDER BY Сумма DESC;
 
+                 -- База данных «Интернет-магазин книг», запросы на выборку --
+
+
+
 
 
 
