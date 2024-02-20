@@ -77,6 +77,16 @@ FROM
 WHERE name_client = 'Баранов Павел'
 ORDER BY buy_id, title;
 
+-- Посчитать, сколько раз была заказана каждая книга, для книги вывести ее автора (нужно посчитать, в каком количестве заказов фигурирует каждая книга).  
+-- Вывести фамилию и инициалы автора, название книги, последний столбец назвать Количество. Результат отсортировать сначала  по фамилиям авторов, а потом по названиям книг.
+
+SELECT name_author, title, COUNT(buy_book.amount) AS 'Количество'
+FROM author
+INNER JOIN book ON author.author_id = book.author_id
+LEFT JOIN buy_book ON buy_book.book_id = book.book_id
+GROUP BY book.title, book.author_id
+ORDER BY name_author, title;
+
 
 
 
