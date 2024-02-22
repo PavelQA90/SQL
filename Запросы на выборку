@@ -97,6 +97,34 @@ INNER JOIN city USING (city_id)
 GROUP BY name_city
 ORDER BY 'Количество', name_city;
 
+-- Вывести номера всех оплаченных заказов и даты, когда они были оплачены.
+
+SELECT DISTINCT buy_id, date_step_end
+FROM buy_step
+WHERE step_id = 1 AND date_step_end IS NOT NULL;
+
+-- Вывести информацию о каждом заказе: его номер, кто его сформировал (фамилия пользователя) 
+-- и его стоимость (сумма произведений количества заказанных книг и их цены), в отсортированном по номеру заказа виде. 
+-- Последний столбец назвать Стоимость.
+
+SELECT buy_book.buy_id, name_client, SUM(buy_book.amount * price) AS "Стоимость"
+FROM book 
+INNER JOIN buy_book USING (book_id)
+INNER JOIN buy USING (buy_id)
+INNER JOIN client USING (client_id)
+GROUP BY buy_book.buy_id
+ORDER BY buy_book.buy_id;
+
+-- Вывести номера заказов (buy_id) и названия этапов,  на которых они в данный момент находятся. 
+-- Если заказ доставлен –  информацию о нем не выводить. Информацию отсортировать по возрастанию buy_id.
+
+SELECT buy_id, name_step
+FROM buy_step
+INNER JOIN step USING (step_id)
+WHERE date_step_end IS NULL AND date_step_beg IS NOT NULL; 
+
+
+
 
 
 
